@@ -1,0 +1,8 @@
+.StarwarsLogo img {
+    border-radius: 50%;
+    margin: auto 5px;
+    float: left;
+    width: 200px;
+    z-index: 2;
+    position: absolute;
+}

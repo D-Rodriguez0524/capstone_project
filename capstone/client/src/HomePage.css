@@ -1,0 +1,9 @@
+.HomePage {
+    width: 100%;
+    /* Set the width of the element */
+    height: 921px;
+    /* Set the height of the element */
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FStar-Wars-Death-Star-AT-AT-space-night-sky-1379225.jpg');
+    /* Specify the URL of the image */
+    background-size: cover;
+}
