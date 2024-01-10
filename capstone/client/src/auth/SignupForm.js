@@ -16,6 +16,8 @@ const SignupForm = ({ signup }) => {
     const INITIAL_STATE = {
         username: "",
         password: "",
+        isRebellion: false,
+        isDarkside: false,
     };
 
     const [formData, setFormData] = useState(INITIAL_STATE);
@@ -31,9 +33,21 @@ const SignupForm = ({ signup }) => {
 
     const handleChange = e => {
         const { name, value } = e.target;
+        console.log(name, value);
+        console.log(e);
         setFormData(fData => ({
             ...fData,
             [name]: value
+        }));
+    };
+
+    const handleChecked = e => {
+        const { name, checked } = e.target;
+        console.log(name, checked);
+        console.log(e);
+        setFormData(fData => ({
+            ...fData,
+            [name]: checked
         }));
     };
 
@@ -71,14 +85,14 @@ const SignupForm = ({ signup }) => {
                             placeholder="Enter Password"
                         />
                     </FormGroup>
-                    {/* <FormGroup>
+                    <FormGroup>
                         <Label htmlFor="isRebellion">Rebellion: </Label>
                         <Input
                             type="checkbox"
                             id="isRebellion"
                             name="isRebellion"
-                            onChange={handleChange}
-                            value={isRebellion}
+                            onChange={handleChecked}
+                            checked={formData.isRebellion}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -87,10 +101,10 @@ const SignupForm = ({ signup }) => {
                             type="checkbox"
                             id="isDarkside"
                             name="isDarkside"
-                            onChange={handleChange}
-                            value={isDarkside}
+                            onChange={handleChecked}
+                            checked={formData.isDarkside}
                         />
-                    </FormGroup> */}
+                    </FormGroup>
                     <Button type="submit" onSubmit={handleSubmit}>Submit</Button>
                 </Form>
             </CardBody>

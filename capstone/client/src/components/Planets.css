@@ -1,0 +1,10 @@
+.Planets{
+    background-image: url("https://cdn.pixabay.com/photo/2023/03/09/13/59/space-7840142_640.jpg");
+        height: 100vh;
+        width: 100vw;
+        background-attachment: fixed;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}

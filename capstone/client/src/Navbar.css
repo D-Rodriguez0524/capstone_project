@@ -1,8 +1,46 @@
 .Navbar{
     background-color: black;
+    opacity: 0.8;
+}
+/* Hamburger menu styles */
+.MenuIcon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.Bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.HideBar2 {
+    opacity: 0;
+}
+
+.RotateBar1 {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.RotateBar3 {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.NavbarLinks {
+    display: none;
+}
+
+.ShowMenu {
+    display: block;
+    /* Additional styling for the expanded menu */
 }
 
 .Navbar a {
     margin: 1rem;
     font-size: 1rem;
+    color: white;
 }

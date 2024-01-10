@@ -1,0 +1,10 @@
+.StarwarsList{
+    background-attachment: fixed;
+    background-image:url("https://wallpapercave.com/wp/wp8013162.jpg");
+    height : 100%;
+    width: 100%;
+}
+
+.StarwarsList h1 {
+    color: white;
+}

@@ -1,16 +1,14 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Routes from './Routes';
-import StarwarsApi from './api/StarwarsApi';
-import { useEffect, useState } from 'react';
-import UserContext from './useContext'
-import UsersApi from './api/UsersApi';
-
+import React from "react";
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Routes from "./Routes";
+import StarwarsApi from "./api/StarwarsApi";
+import { useEffect, useState } from "react";
+import UserContext from "./useContext";
+import UsersApi from "./api/UsersApi";
 
 function App() {
-
   const [movies, setMovies] = useState([]);
   const [people, setPeople] = useState([]);
   const [planets, setPlanets] = useState([]);
@@ -18,22 +16,18 @@ function App() {
   const [starships, setStarships] = useState([]);
   const [species, setSpecies] = useState([]);
   const [currUser, setCurrUser] = useState(null);
-  const [token, setToken] = useState('');
-
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     async function fetchData() {
       try {
-
-
-        //fetch data from api 
-        const moviesData = await StarwarsApi.getData('movies');
-        const peopleData = await StarwarsApi.getData('people');
-        const planetsData = await StarwarsApi.getData('planets');
-        const vehiclesData = await StarwarsApi.getData('vehicles');
-        const starshipsData = await StarwarsApi.getData('starships');
-        const speciesData = await StarwarsApi.getData('species');
-
+        //fetch data from api
+        const moviesData = await StarwarsApi.getData("movies");
+        const peopleData = await StarwarsApi.getData("people");
+        const planetsData = await StarwarsApi.getData("planets");
+        const vehiclesData = await StarwarsApi.getData("vehicles");
+        const starshipsData = await StarwarsApi.getData("starships");
+        const speciesData = await StarwarsApi.getData("species");
 
         // Update all state variables together
         setMovies(moviesData);
@@ -42,8 +36,6 @@ function App() {
         setVehicles(vehiclesData);
         setStarships(starshipsData);
         setSpecies(speciesData);
-
-
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -52,15 +44,14 @@ function App() {
     fetchData();
   }, []);
 
-
-  const isMovies = movies.map(m => {
-    let { producer, director, release_date } = m
-    return ({
+  const isMovies = movies.map((m) => {
+    let { producer, director, release_date } = m;
+    return {
       producer: producer,
       director: director,
-      release_date: release_date
-    });
-  })
+      release_date: release_date,
+    };
+  });
 
   // User API Call to grab data. Dependency: Token. Will grab user data from DB
   useEffect(() => {
@@ -68,53 +59,56 @@ function App() {
       console.log("TOKEN state app", token);
       if (token) {
         try {
+          console.log("token ====> ", token);
           let { username } = token;
+          console.log("username ========>", username);
           UsersApi.token = token;
-          let user = await UsersApi.getOneUser(username);
-          setCurrUser(user)
+          let user = await UsersApi.getCurrUser(username);
+          console.log("user ==> ", user);
+          setCurrUser(user);
         } catch (error) {
           console.log("User loading error:", error);
         }
       }
-    };
-    getUser()
+    }
+    getUser();
+    console.log("currUser =====>", currUser);
   }, [token]);
 
   // Signup Function = Takes Userdata -> returns: token if user successfully added
   const signup = async (formData) => {
     try {
       let token = await UsersApi.signup(formData);
-      setToken(token)
-      return { success: true }
+      setToken(token);
+      return { success: true };
     } catch (e) {
       console.error("Error: ", e);
       return { success: false, e };
     }
-  }
+  };
 
   const loginUser = async (formData) => {
     try {
-      let token = UsersApi.login(formData);
+      let token = await UsersApi.login(formData);
       setToken(token);
-      return { success: true }
+      return { success: true };
     } catch (e) {
-      console.error("Error: ", e)
+      console.error("Error: ", e);
       return { success: false, e };
     }
-  }
+  };
 
   // Logout:
   const logout = () => {
     setCurrUser(null);
     setToken(null);
-  }
+  };
 
   return (
     <div className="App">
       <UserContext.Provider value={{ logout, currUser, setCurrUser }}>
         <BrowserRouter>
-
-          <Navbar />
+          <Navbar isAuthenticated={currUser ? true : false} />
           <Routes
             movies={movies}
             people={people}
@@ -126,7 +120,6 @@ function App() {
             signup={signup}
             login={loginUser}
           />
-
         </BrowserRouter>
       </UserContext.Provider>
     </div>

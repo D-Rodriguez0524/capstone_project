@@ -1,0 +1,14 @@
+.Vehicle {
+    background-image: url("https://cdn.pixabay.com/photo/2020/02/21/22/49/star-wars-4868964_1280.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul{
+    color: white;
+}
