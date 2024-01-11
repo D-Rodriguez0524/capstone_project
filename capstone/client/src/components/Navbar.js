@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../Navbar.css";
 
-const Navbar = ({ isAuthenticated }) => {
+const Navbar = ({ isAuthenticated, logout }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -39,11 +39,8 @@ const Navbar = ({ isAuthenticated }) => {
         </NavLink>
         {isAuthenticated ? (
           <>
-            <NavLink exact to="/logout">
+            <NavLink exact to="/" onClick={logout}>
               Logout
-            </NavLink>
-            <NavLink exact to="/profile">
-              Profile
             </NavLink>
           </>
         ) : (

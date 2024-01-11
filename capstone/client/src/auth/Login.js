@@ -9,6 +9,7 @@ import {
   Form,
 } from "reactstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import "./Login.css";
 
 const LoginForm = ({ login }) => {
   const INITIAL_STATE = {
@@ -38,33 +39,43 @@ const LoginForm = ({ login }) => {
   };
 
   return (
-    <Card style={{ width: "20rem" }}>
-      <CardBody>
-        <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label htmlFor="username">username: </Label>
-            <Input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="password">password: </Label>
-            <Input
-              type="text"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </FormGroup>
-          <Button type="submit"> Enter</Button>
-        </Form>
-      </CardBody>
-    </Card>
+    <div className="Login">
+      <Card
+        style={{ width: "30rem", backgroundColor: "black", opacity: "0.8" }}
+      >
+        <CardBody>
+          <Form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Label htmlFor="username" style={{ color: "white" }}>
+                Username:{" "}
+              </Label>
+              <Input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                placeholder="Enter Username"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="password" style={{ color: "white" }}>
+                Password:{" "}
+              </Label>
+              <Input
+                type="text"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter Password"
+              />
+            </FormGroup>
+            <Button type="submit"> Enter</Button>
+          </Form>
+        </CardBody>
+      </Card>
+    </div>
   );
 };
 

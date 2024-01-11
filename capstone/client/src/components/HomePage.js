@@ -1,10 +1,12 @@
-import React from "react";
-import '../HomePage.css'
+import React, { useContext } from "react";
+import "../HomePage.css";
+import UserContext from "../useContext";
 
 const HomePage = () => {
-    return (
-        <div className="HomePage"></div>
-    )
-}
+  const { currUser } = useContext(UserContext);
+  return (
+    <div className="HomePage">{currUser ? <h1>Welcome back!</h1> : <></>}</div>
+  );
+};
 
 export default HomePage;

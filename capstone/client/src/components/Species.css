@@ -1,0 +1,10 @@
+.Species {
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffsmedia.imgix.net%2F0a%2Ff1%2F07%2F02%2Fb1f2%2F428f%2Fbb6c%2F7891359040b4%2Fchewbacca-and-han-solo-in-star-wars.jpeg");
+    height: 100vh;
+    width: 100vw;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

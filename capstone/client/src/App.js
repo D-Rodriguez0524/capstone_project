@@ -44,6 +44,28 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    // on startup/refresh, save localStorage token & username to app states
+    const token = localStorage.getItem("currentToken");
+    const user = localStorage.getItem("currentUser");
+    if (token) {
+      UsersApi.token = token;
+      setCurrUser(user);
+      setToken(token);
+    }
+  }, []);
+
+  useEffect(() => {
+    // when a currentToken is updated, the currentUser and currentToken are saved to localStorage
+    if (currUser) {
+      localStorage.setItem("currentUser", currUser);
+      localStorage.setItem("currentToken", token);
+    } else {
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("currentToken");
+    }
+  }, [token]);
+
   const isMovies = movies.map((m) => {
     let { producer, director, release_date } = m;
     return {
@@ -52,28 +74,6 @@ function App() {
       release_date: release_date,
     };
   });
-
-  // User API Call to grab data. Dependency: Token. Will grab user data from DB
-  useEffect(() => {
-    async function getUser() {
-      console.log("TOKEN state app", token);
-      if (token) {
-        try {
-          console.log("token ====> ", token);
-          let { username } = token;
-          console.log("username ========>", username);
-          UsersApi.token = token;
-          let user = await UsersApi.getCurrUser(username);
-          console.log("user ==> ", user);
-          setCurrUser(user);
-        } catch (error) {
-          console.log("User loading error:", error);
-        }
-      }
-    }
-    getUser();
-    console.log("currUser =====>", currUser);
-  }, [token]);
 
   // Signup Function = Takes Userdata -> returns: token if user successfully added
   const signup = async (formData) => {
@@ -89,8 +89,9 @@ function App() {
 
   const loginUser = async (formData) => {
     try {
-      let token = await UsersApi.login(formData);
+      let { token, user } = await UsersApi.login(formData);
       setToken(token);
+      setCurrUser(user);
       return { success: true };
     } catch (e) {
       console.error("Error: ", e);
@@ -101,14 +102,15 @@ function App() {
   // Logout:
   const logout = () => {
     setCurrUser(null);
-    setToken(null);
+    UsersApi.token = null;
+    setToken(UsersApi.token);
   };
 
   return (
     <div className="App">
       <UserContext.Provider value={{ logout, currUser, setCurrUser }}>
         <BrowserRouter>
-          <Navbar isAuthenticated={currUser ? true : false} />
+          <Navbar isAuthenticated={currUser ? true : false} logout={logout} />
           <Routes
             movies={movies}
             people={people}

@@ -90,9 +90,10 @@ async function authenticate(username, password) {
     const user = await User.findOne({ where: { username: username } });
     if (user) {
       const isValid = await bcrypt.compare(password, user.password);
-      if (isValid === true) {
-        delete user.password;
-        return user;
+      if (isValid) {
+        const userData = user.get({ plain: true });
+        delete userData.password;
+        return userData;
       }
     } else {
       console.error("error");

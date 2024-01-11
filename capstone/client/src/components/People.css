@@ -1,5 +1,5 @@
-.Starships{
-    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fget.wallhere.com%2Fphoto%2FStar-Wars-Death-Star-AT-AT-space-night-sky-1379225.jpg");
+.People {
+    background-image: url("https://cdn.pixabay.com/photo/2016/01/15/12/41/disney-1141607_1280.jpg");
     height: 100vh;
     width: 100vw;
     background-attachment: fixed;
@@ -7,8 +7,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    }
 
-ul{
+ul {
     color: white;
 }

@@ -10,8 +10,6 @@ import Vehicle from "./components/Vehicle";
 import Species from "./components/Species";
 import SignupForm from "./auth/SignupForm";
 import LoginForm from "./auth/Login";
-import PrivateRoute from "./components/PrivateRoute";
-import Profile from "./components/Profile";
 
 const Routes = ({
   movies,
@@ -79,10 +77,6 @@ const Routes = ({
       <Route exact path="/species/:id">
         <Species speciesData={species} />
       </Route>
-
-      <PrivateRoute exact path="/profile">
-        <Profile />
-      </PrivateRoute>
     </Switch>
   );
 };

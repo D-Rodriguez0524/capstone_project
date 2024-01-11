@@ -40,7 +40,7 @@ class UsersApi {
   // checks auth and returns token if user and password correct
   static async login(data) {
     let res = await this.request(`auth/token`, data, "post");
-    return res.token;
+    return res;
   }
 }
 

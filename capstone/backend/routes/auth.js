@@ -12,7 +12,7 @@ router.post("/token", async function (req, res, next) {
     // console.log(user);
     const token = createToken({ user });
     // console.log(token);
-    return res.json({ token });
+    return res.json({ token, user });
   } catch (e) {
     return res.status(500);
   }
